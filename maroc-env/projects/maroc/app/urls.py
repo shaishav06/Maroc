@@ -12,7 +12,8 @@ urlpatterns = [
     path('activate/<uname>',views.activate,name="activate") ,
     path('logout',views.logout,name="logout") ,
     path('forgot',views.forgot,name="forgot") ,
-    path('changepassword/<token>',views.changepassword,name="changepassword") ,
+    path('changepassword/<token>/<username>',views.changepassword,name="changepassword") ,
     path('weightloss',views.weightloss,name="weightloss"),
-    path('pcos',views.pcos,name="pcos")
+    path('pcos',views.pcos,name="pcos"),
+    path('temp',views.temp,name="temp")
 ]
