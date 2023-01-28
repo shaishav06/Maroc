@@ -9,6 +9,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes,force_str
+from .helper import send_forgot_password_mail
+from .models import Profile
 
 
 # Create your views here.
@@ -119,3 +121,66 @@ def activate(request,uname):
         return redirect('home')
     else:
         return render(request,'activation_failed.html')
+
+import uuid
+def forgot(request):
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            print(username)
+            if not User.objects.filter(username=username).first():
+                messages.success(request,'Not User found with this Username!')        
+                return redirect(forgot)
+            
+            user_obj = User.objects.get(username=username)
+            print(username)
+            token = str(uuid.uuid4())
+            print(username)
+            profile_obj = Profile.objects.get(user=user_obj)
+            profile_obj.forgot_password_token = token
+            profile_obj.save()
+            print(username)
+            send_forgot_password_mail(user_obj.email,token)
+            print(username)
+
+            messages.success(request,'An email is sent')
+            return redirect(forgot)
+    except Exception as e:
+        print(e)
+    return render(request,'forgot.html')
+
+def changepassword(request,token):
+    context = {}
+    try:
+        profile_obj = User.objects.get(forgot_password_token = token).first()
+        context = {'user_id' : profile_obj.user.id}
+
+        print(profile_obj)
+
+        if request.method =='POST':
+            new_pass = request.POST.get('password')
+            con_new_pass = request.POST.get('con_password')
+            user_id = request.POST.get('user_id')
+
+            if user_id is None:
+                messages.success(request,'No User Found!!!')
+                return redirect(f'changepassword/{token}')
+
+            if new_pass != con_new_pass:
+                messages.success(request,'Both Password should be same')
+                return redirect(f'changepassword/{token}')
+
+            user_obj = User.objects.get(id=user_id)
+            user_obj.set_password(new_pass)
+            user_obj.save()
+            return redirect('login')
+
+    except Exception as e:
+        print(e)
+    return render(request,'changepassword.html')
+
+def pcos(request):
+    return render(request,'pcos.html')
+
+def weightloss(request):
+    return render(request,'weightloss.html')
