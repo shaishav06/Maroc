@@ -12,6 +12,7 @@
       </style>
     
     <script src="https://kit.fontawesome.com/240c369354.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <!-- Font Awesome -->
@@ -23,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;600&display=swap" rel="stylesheet">
-    <title>Maroc - A Health App</title>
+    <title>{% block title %}{% endblock title %} | Maroc</title>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
                                 <a href="" id="home">Home</a>
                             </li>
                             <li>
-                                <a href="" class="wieghtloss">Weightloss</a>
+                                <a href="weightloss" class="wieghtloss">Weightloss</a>
                             </li>
                             <li>
                                 <a href="" id="pcos">PCOS</a>
@@ -70,11 +71,19 @@
                     </a>
                     <a href="signin" class="user">
                         <i class="far fa-user"></i>
+                        <i class="fas"><span style="font-size:17px">{{username}}</i>
+                    </a>
+                    <a href="logout" class="user">
+                        <i class="fas fa-sign-out"></i>
+                        <i class="fas"><span style="font-size:17px">Logout</span></i>
                     </a>
                 </div>
             </div>
         </div>
     </header>
+    
+    {% block body %}{% endblock body %}
+
     <footer>
         <div class="social-call">
             <div class="social">
@@ -99,33 +108,10 @@
     </div>
     <!--END OF SEARCH-->
 
-    <div class="how-section1">
-        <div class="row">
-            <div class="col-md-6">
-                <h1>Welcome to Maroc,</h1>
-
-                <p>Maroc is a nutrition consulting website based in India that aims to help clients manage chronic health issues such as weight gain, diabetes, PCOS, and thyroid through personalized diet protocols.<br><br>
-
-                Our team of experienced nutritionists work closely with clients to develop a tailored plan that addresses their specific needs and goals. We believe that proper nutrition is key to achieving and maintaining a healthy lifestyle, and we are dedicated to helping our clients achieve their best health.
-                <br><br>
-                <b style="font-weight:800;font-family:'Mukta';">Our services include</b>
-                <ul>
-                    <li>Weight loss consulting</li>
-                    <li>PCOS management</li>
-                    <li>Diabetes management</li>
-                    <li>Thyroid management</li>
-                </ul>
-                </p>
-                <input type="submit" class="login-btn" value="Get Started" id="start" onclick="window.location='signup';" >
-            </div>
-            <div class="col-md-6 how-img">
-                <img src="static/images/body.png" class="" alt="" />
-            </div>
-        </div>
-    </div>
     {% load static %}  
     <script src="{% static '/scripts/main.js' %}" type="text/javascript"></script>  
     {% comment %} <script src="static/scripts/main.js"></script> {% endcomment %}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
 </body>
+</html>
 
