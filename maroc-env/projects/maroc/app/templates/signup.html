@@ -1,57 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock title %}
+{% block body %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ===== CSS ===== -->
-    <link rel="stylesheet" href="static/styles/style.css">
-    
-    <script src="https://kit.fontawesome.com/240c369354.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet" />
-    <title>Maroc - A Health App</title>
-</head>
-
-<body>
-
-    <div class="form">
-
-        <!-- SIGN UP FORM -->
-        <div class="sign-up-form">
-            <!--CANCEL FORM BTN-->
-            <a href="index" class="form-cancel">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-
-            <strong> <span class="effect">S</span>ign <span class="effect">U</span>p</strong>
-            <form action="" method="post">
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <p style="font-size:18px"><strong>Messages : </strong>{{ message }}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="padding-left:7px;padding-right:7px;border:none;background:transparent;position:absolute;right:0;margin-right:20px">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+            <form class="login" method="post" action="">
                 {% csrf_token %}
-                <input type="text" placeholder="Username" name="username" id="username">
-                <input type="email" placeholder="Exemple@gmail.com" name="email" id="email" required>
-                <input type="password" placeholder="Password" name="password" id="pass" required>
-                <input type="password" placeholder="Confirm Password" name="confirmpassword" id="pass" required>
-                <input type="submit" value="Sign up" id="signup"> 
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input type="text" class="login__input" name="username" placeholder="Username" id="username">
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-envelope"></i>
+                    <input type="email" class="login__input" name="email" placeholder="Email" id="email">
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" name="password" placeholder="Password" id="pass">
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input type="password" class="login__input" name="confirmpassword" placeholder="Confirm Password" id="pass">
+                </div>
+                <div class="button login__submit">
+                    <input type="submit" name="submit" value="Sign up Now" class="button__text" id="signup">
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </div>
+                <div class="form-btns">
+                    <a href="signin" class="sign-up-btn" id="create">Already have an account? Login</a>
+                </div>
             </form>
-
-            <!--FORGET & SIGN UP BUTTON-->
-            <div class="form-btns">
-                <a href="signin" class="already-account">Already Have Account?</a>
-            </div>
-            <!--END OF FORGET & SIGN UP-->
+            
         </div>
-        <!-- END OF SIGN UP FORM -->
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
     </div>
+</div>
 
-    </div>
-    <script src="static/scripts/main.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
-</body>
 
+{% endblock body %}

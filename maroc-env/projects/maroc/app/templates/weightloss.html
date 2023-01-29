@@ -1,28 +1,25 @@
-{% extends 'base.html' %}
-
-{% block title %}
-Weightloss
-{% endblock title %}
-
+{% extends 'userbase.html' %}{% block title %}Weightloss{% endblock title %}
 {% block body %}
-<div class="w3-container w3-display-middle" style="width:500px">
-    <div class="w3-container w3-orange w3-center w3-padding w3-round-large">
-    <h2><b>Weightloss Model</b></h2>
-  </div>
-    <br>
-    <form class="w3-container" method="post" action="">
-        {% csrf_token %}
-        <p>
-        <label>Enter Your Weight</label>
-        <input class="w3-input" type="number" name="weight"></p>
-        <p>
-        <label>Enter Your Height</label>
-        <input class="w3-input" type="number" name="height"></p>
-        <p>
-            <label>Enter Your Age</label>
-            <input class="w3-input" type="number" name="age"></p>
-        <p>
-        <input type="submit" value="Submit" class="w3-button w3-orange w3-round-large w3-padding">
-    </form>   
-</div>
+<section class="contact" id="contact">
+    <div class="heading">
+        <h3>Weightloss Diet Plan</h3><br><br>
+    </div>
+    <div class="container">
+        <div class="contact-form">
+            <div class="row">
+                <form method="post" action="">
+                {% csrf_token %}
+                <div class="col-md-5">
+                    <input type="text" placeholder="Your Weight..." name="weight">
+                    <input type="text" placeholder="Your Height..." name="height">
+                    <input type="text" placeholder="Your Age..." name="age">
+                </div>
+                <input type="submit" value="Get Diet Plan" class="btn">
+            </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>
 {% endblock body %}

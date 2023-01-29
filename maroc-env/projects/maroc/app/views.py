@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from .helper import send_forgot_password_mail
-from .models import Profile
+from .models import Profile,Contact_table
 # from .wl import wl
 
 # Create your views here.
@@ -21,6 +21,31 @@ from .models import Profile
 def index(request):
     return render(request, 'index.html')
 
+
+def service(request):
+    return render(request, 'service.html')
+
+
+def about(request):
+    return render(request, 'about.html')
+
+
+def contact(request):
+    if request.method == 'POST':
+        user = request.POST['name']
+        email = request.POST['email']
+        problem = request.POST['problem']
+        desc = request.POST['desc']
+
+        con_obj = Contact_table.objects.create(user=user,email=email,problem=problem,desc=desc)
+        con_obj.save()
+        messages.success(request,"Your Problem is sended to admin. Please wait 2-3 days for furture communication !")
+        return render(request, 'index.html')
+
+    return render(request, 'contact.html')
+
+def notavailable(request):
+    return render(request, 'notavailable.html')
 
 def signin(request):
     if 'username' in request.session:
@@ -211,10 +236,11 @@ def weightloss(request):
 
         ans = weightpredict(height, weight)
 
-        ans = ans/2.2046
-
+        ans = int(ans/2.2046)
+        
+        
         diet = {
-            "general": {
+                "general": {
                 "breakfast": "poha with vegetables/2 egg white(boiled) + 1 toast multigrain/fresh fruit juice/toned milk(1 glass)",
                 "lunch": "1-2 chapatis(mixed grains),vegetables+dal+curd/butter milk bhuna jeera/pepper +salad",
                 "Dinner": "low fat panner tikka/soya  uggets + saulted vegetables or roasted /grill/ chicken or fish vegetables with a piece of bread/chapatti",
@@ -263,7 +289,14 @@ def weightloss(request):
         else:
            diet =  diet['general']
 
+        import operator
+
+        from_weight = ans -  3
+        to_weight = ans + 3
+
         context = {
+            'from':from_weight,
+            'to':to_weight,
             'ans': ans,
             'loss' : loss,
             'diet' : diet
