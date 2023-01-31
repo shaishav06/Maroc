@@ -197,7 +197,7 @@ def changepassword(request, token, username):
         if request.method == 'POST':
             new_pass = request.POST.get('password')
             con_new_pass = request.POST.get('con_password')
-            username = request.POST.get('username')
+            # username = request.POST.get('username')
 
             if username is None:
                 messages.success(request, 'No User Found!!!')
@@ -207,10 +207,10 @@ def changepassword(request, token, username):
                 messages.success(request, 'Both Password should be same')
                 # return redirect(f'changepassword/{token}/{username}')
 
-            user_obj = User.objects.get(username)
+            user_obj = User.objects.get(username=username)
             user_obj.set_password(new_pass)
             user_obj.save()
-            return redirect('login')
+            return redirect('signin')
 
     except Exception as e:
         print(e)

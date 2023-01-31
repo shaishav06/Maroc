@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Sign In{% endblock title %}
+{% block title %}Forgot Password{% endblock title %}
 {% block body %}
     <!-- header section ends -->
     
@@ -21,19 +21,15 @@
                         <i class="login__icon fas fa-user"></i>
                         <input type="text" class="login__input" name="username" placeholder="Username" id="email" required>
                     </div>
-                    <div class="login__field">
-                        <i class="login__icon fas fa-lock"></i>
-                        <input type="password" class="login__input" name="password" placeholder="Password" id="pass" required>
-                    </div>
                     <div class="button login__submit">
-                        <input type="submit" value="Log In Now" class="button__text" id="login" required>
+                        <input type="submit" value="Forgot Password" class="button__text" id="login" required>
                         <i class="button__icon fas fa-chevron-right"></i>
                     </div>
                 </form>
                 <div class="social-login">
                     <div class="social-icons">
                         <a href="signup" class="social-login__icon">Create Account</a>
-                        <a href="forgot" class="social-login__icon">Forgot Password</a>
+                        <a href="signin" class="social-login__icon">Remember Your Password? </a>
                     </div>
                 </div>
             </div>

@@ -9,10 +9,13 @@
             <div class="row">
                 <form method="post" action="">
                 {% csrf_token %}
-                <div class="col-md-5">
-                    <input type="text" placeholder="Your Weight..." name="weight">
-                    <input type="text" placeholder="Your Height..." name="height">
-                    <input type="text" placeholder="Your Age..." name="age">
+                <div style="
+                display: flex;
+                flex-direction: column;
+                justify-content: :space-between;margin-top:-300px">
+                    <input type="number" placeholder="Your Weight in kg..." name="weight" required min="20" max="200">
+                    <input type="number" placeholder="Your Height in cm..." name="height" required min="50" max="250">
+                    <input type="number" placeholder="Your Age" required min="1" max="90">
                 </div>
                 <input type="submit" value="Get Diet Plan" class="btn">
             </form>
